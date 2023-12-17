@@ -1,6 +1,6 @@
 
 # Creating a storage bucket to store cloud function objects
-resource "google_storage_bucket" "bucket" {
+data "google_storage_bucket" "bucket" {
   project  = var.project_id
   name     = "${var.project_id}-task5-bucket"
   location = var.region
