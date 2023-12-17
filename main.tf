@@ -6,6 +6,7 @@ resource "google_storage_bucket" "bucket" {
   location = var.region
 }
 
+# 
 # data "archive_file" "function_src" {
 #   for_each    = var.functions
 #   type        = "zip"
