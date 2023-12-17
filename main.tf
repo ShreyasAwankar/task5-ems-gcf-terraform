@@ -6,12 +6,12 @@ resource "google_storage_bucket" "bucket" {
   location = var.region
 }
 
-data "archive_file" "function_src" {
-  for_each    = var.functions
-  type        = "zip"
-  output_path = "/tmp/${each.value.zip}"
-  source_dir  = "../function-zips"
-}
+# data "archive_file" "function_src" {
+#   for_each    = var.functions
+#   type        = "zip"
+#   output_path = "/tmp/${each.value.zip}"
+#   source_dir  = "../function-zips"
+# }
 
 resource "google_storage_bucket_object" "function_zip" {
   for_each = var.functions
