@@ -2,7 +2,7 @@
 # Creating a storage bucket to store cloud function objects
 resource "google_storage_bucket" "bucket" {
   project  = var.project_id
-  name     = "${var.project_id}-bucket"
+  name     = "${var.project_id}-task5-bucket"
   location = var.region
 }
 
@@ -16,7 +16,7 @@ resource "google_storage_bucket" "bucket" {
 resource "google_storage_bucket_object" "function_zip" {
   for_each = var.functions
   name     = each.key
-  bucket   = "${var.project_id}-bucket1"
+  bucket   = google_storage_bucket.bucket.name
   source   = each.value.zip
 }
 
@@ -32,7 +32,7 @@ resource "google_cloudfunctions2_function" "function" {
 
     source {
       storage_source {
-        bucket = "${var.project_id}-bucket1"
+        bucket = google_storage_bucket.bucket.name
         object = google_storage_bucket_object.function_zip[each.key].name
       }
     }
