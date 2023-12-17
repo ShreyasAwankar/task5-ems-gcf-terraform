@@ -32,7 +32,7 @@ variable "functions" {
     },
     "searchemployees" : {
       zip        = "function-zips/search-employee.zip"
-      name       = "searchEmployee"
+      name       = "searchEmployees"
       trigger    = "http-trigger"
       runtime    = "go121"
       entrypoint = "SearchEmployees"
