@@ -1,11 +1,10 @@
 
 # Creating a storage bucket to store cloud function objects
-resource "google_storage_bucket" "bucket" {
-  project       = var.project_id
-  name          = "${var.project_id}-bucket1"
-  location      = var.region
-  force_destroy = true
-}
+# resource "google_storage_bucket" "bucket" {
+#   project  = var.project_id
+#   name     = "${var.project_id}-bucket1"
+#   location = var.region
+# }
 
 # data "archive_file" "function_src" {
 #   for_each    = var.functions
@@ -17,7 +16,7 @@ resource "google_storage_bucket" "bucket" {
 resource "google_storage_bucket_object" "function_zip" {
   for_each = var.functions
   name     = each.key
-  bucket   = google_storage_bucket.bucket.name
+  bucket   = "${var.project_id}-bucket1"
   source   = each.value.zip
 }
 
