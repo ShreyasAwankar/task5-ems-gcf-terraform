@@ -22,7 +22,7 @@ func CreateEmployee(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNoContent)
 		return
 	}
-	// Set CORS headers for the main request.
+	// Set CORS headers for the main request..
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	mu.Lock()
