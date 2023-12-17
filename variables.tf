@@ -17,42 +17,42 @@ variable "functions" {
 
   default = {
     "createemployee" : {
-      zip        = "../function-zips/create-employee.zip"
+      zip        = "function-zips/create-employee.zip"
       name       = "createEmployee"
       trigger    = "http-trigger"
       runtime    = "go121"
       entrypoint = "CreateEmployee"
     },
     "deleteemployee" : {
-      zip        = "../function-zips/delete-employee.zip"
+      zip        = "function-zips/delete-employee.zip"
       name       = "deleteEmployee"
       trigger    = "http-trigger"
       runtime    = "go121"
       entrypoint = "DeleteEmployee"
     },
     "searchemployee" : {
-      zip        = "../function-zips/search-employee.zip"
+      zip        = "function-zips/search-employee.zip"
       name       = "searchEmployee"
       trigger    = "http-trigger"
       runtime    = "go121"
       entrypoint = "SearchEmployees"
     },
     "getemployeebyid" : {
-      zip        = "../function-zips/get-employee-by-id.zip"
+      zip        = "function-zips/get-employee-by-id.zip"
       name       = "getEmployeeById"
       trigger    = "http-trigger"
       runtime    = "go121"
       entrypoint = "GetEmployee"
     },
     "getallemployees" : {
-      zip        = "../function-zips/get-all-employees.zip"
+      zip        = "function-zips/get-all-employees.zip"
       name       = "getAllEmployees"
       trigger    = "http-trigger"
       runtime    = "go121"
       entrypoint = "GetAllEmployees"
     },
     "updateemployee" : {
-      zip        = "../function-zips/update-employee.zip"
+      zip        = "function-zips/update-employee.zip"
       name       = "updateEmployee"
       trigger    = "http-trigger"
       runtime    = "go121"
