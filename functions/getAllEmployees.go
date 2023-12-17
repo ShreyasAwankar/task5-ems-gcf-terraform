@@ -14,8 +14,6 @@ func GetAllEmployees(w http.ResponseWriter, r *http.Request) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	defer logClient.Close()
-
 	// Set CORS headers for the preflight request
 	if r.Method == http.MethodOptions {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -68,6 +66,7 @@ func GetAllEmployees(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(employees)
+
 	logger.Log(logging.Entry{
 		Payload:  "Employees fetched successfully",
 		Severity: logging.Info,

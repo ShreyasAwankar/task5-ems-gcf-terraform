@@ -82,9 +82,9 @@ func DeleteEmployee(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
-	// logger.Infof("Employee with employee ID %d deleted successfully", employeeId)
+	w.WriteHeader(http.StatusOK)
+
 	logger.Log(logging.Entry{
 		Payload:  fmt.Sprintf("Employee with employee ID %d deleted successfully", employeeId),
 		Severity: logging.Info,
