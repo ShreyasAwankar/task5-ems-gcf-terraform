@@ -45,6 +45,10 @@ resource "google_cloudfunctions2_function" "function" {
     all_traffic_on_latest_revision = false
     service_account_email          = "terraform-gcf@terraform-cloud-functions-ems.iam.gserviceaccount.com"
   }
+  lifecycle {
+    ignore_changes = [build_config[0].source[0].storage_source[0].object]
+  }
+
 }
 
 resource "google_cloud_run_service_iam_member" "member" {
