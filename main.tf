@@ -32,7 +32,7 @@ resource "google_cloudfunctions2_function" "function" {
 
     source {
       storage_source {
-        bucket = google_storage_bucket.bucket.name
+        bucket = "${var.project_id}-bucket1"
         object = google_storage_bucket_object.function_zip[each.key].name
       }
     }
