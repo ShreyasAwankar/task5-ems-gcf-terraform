@@ -16,42 +16,42 @@ variable "functions" {
   }))
 
   default = {
-    "createemployee" : {
+    "create-employee" : {
       zip        = "function-zips/create-employee.zip"
       name       = "createEmployee"
       trigger    = "http-trigger"
       runtime    = "go121"
       entrypoint = "CreateEmployee"
     },
-    "deleteemployee" : {
+    "delete-employee" : {
       zip        = "function-zips/delete-employee.zip"
       name       = "deleteEmployee"
       trigger    = "http-trigger"
       runtime    = "go121"
       entrypoint = "DeleteEmployee"
     },
-    "searchemployee" : {
+    "search-employees" : {
       zip        = "function-zips/search-employee.zip"
       name       = "searchEmployee"
       trigger    = "http-trigger"
       runtime    = "go121"
       entrypoint = "SearchEmployees"
     },
-    "getemployeebyid" : {
+    "get-employee-by-id" : {
       zip        = "function-zips/get-employee-by-id.zip"
       name       = "getEmployeeById"
       trigger    = "http-trigger"
       runtime    = "go121"
       entrypoint = "GetEmployee"
     },
-    "getallemployees" : {
+    "get-all-employees" : {
       zip        = "function-zips/get-all-employees.zip"
       name       = "getAllEmployees"
       trigger    = "http-trigger"
       runtime    = "go121"
       entrypoint = "GetAllEmployees"
     },
-    "updateemployee" : {
+    "update-employee" : {
       zip        = "function-zips/update-employee.zip"
       name       = "updateEmployee"
       trigger    = "http-trigger"
