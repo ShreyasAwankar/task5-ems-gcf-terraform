@@ -5,7 +5,7 @@ data "google_storage_bucket" "existing_bucket" {
 
 # Creating a storage bucket to store cloud function objects
 resource "google_storage_bucket" "bucket" {
-  count    = data.google_storage_bucket.existing_bucket ? 0 : 1
+  count    = length(data.google_storage_bucket.existing_bucket) > 0 ? 0 : 1
   project  = var.project_id
   name     = "${var.project_id}-task5-bucket"
   location = var.region
