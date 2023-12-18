@@ -22,7 +22,7 @@ data "archive_file" "function_src" {
 resource "google_storage_bucket_object" "function_zip" {
   for_each = var.functions
   name     = each.key
-  bucket   = google_storage_bucket.bucket.name
+  bucket   = google_storage_bucket.bucket[0].name
   source   = data.archive_file.function_src[each.key].output_path
   # source = each.value.zip
 }
