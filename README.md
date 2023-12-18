@@ -36,8 +36,6 @@ overview of the project and how to get started.
   added, his/her employee id will be the maximum employee id presentin the database + 1. It will be generated automatically upon addition of each
   employee.
 
-## Getting Started
+## Accessing the API
 
-- Clone this repository into your machine.
-- navigate to dist folder
-- run index.html on server to render swagger ui
+To access and test the API, [_click here_](https://shreyasawankar.github.io/task5-ems-gcf-terraform/) to get directed to swagger-ui.
