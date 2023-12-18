@@ -6,11 +6,6 @@ variable "region" {
   default = "us-central1"
 }
 
-variable "create_bucket" {
-  description = "Set to true if you want to create a new storage bucket, false to import an existing one"
-  default     = true
-}
-
 variable "functions" {
   type = map(object({
     zip        = string
