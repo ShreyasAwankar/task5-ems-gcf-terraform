@@ -1,15 +1,14 @@
 # Check if bucket already exists
-data "google_storage_bucket" "existing_bucket" {
+data "google_storage_bucket" "bucket" {
   name = "${var.project_id}-task5-bucket"
 }
 
 # Creating a storage bucket to store cloud function objects
-resource "google_storage_bucket" "bucket" {
-  count    = length(data.google_storage_bucket.existing_bucket) > 0 ? 0 : 1
-  project  = var.project_id
-  name     = "${var.project_id}-task5-bucket"
-  location = var.region
-}
+# resource "google_storage_bucket" "bucket" {
+#   project  = var.project_id
+#   name     = "${var.project_id}-task5-bucket"
+#   location = var.region
+# }
 
 
 data "archive_file" "function_src" {
@@ -22,7 +21,7 @@ data "archive_file" "function_src" {
 resource "google_storage_bucket_object" "function_zip" {
   for_each = var.functions
   name     = each.key
-  bucket   = google_storage_bucket.bucket[0].name
+  bucket   = google_storage_bucket.bucket.name
   source   = data.archive_file.function_src[each.key].output_path
   # source = each.value.zip
 }
@@ -39,7 +38,7 @@ resource "google_cloudfunctions2_function" "function" {
 
     source {
       storage_source {
-        bucket = google_storage_bucket.bucket[0].name
+        bucket = google_storage_bucket.bucket.name
         object = google_storage_bucket_object.function_zip[each.key].name
       }
     }
