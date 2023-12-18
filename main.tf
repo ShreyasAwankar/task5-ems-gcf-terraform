@@ -1,24 +1,31 @@
 
+data "google_storage_bucket" "existing_bucket" {
+  count = var.create_bucket ? 0 : 1
+  name  = "${var.project_id}-task5-bucket"
+}
+
 # Creating a storage bucket to store cloud function objects
 resource "google_storage_bucket" "bucket" {
+  count    = var.create_bucket ? 1 : 0
   project  = var.project_id
   name     = "${var.project_id}-task5-bucket"
   location = var.region
 }
 
 
-# data "archive_file" "function_src" {
-#   for_each    = var.functions
-#   type        = "zip"
-#   output_path = "/tmp/${each.value.zip}"
-#   source_dir  = "../function-zips"
-# }
+data "archive_file" "function_src" {
+  for_each    = var.functions
+  type        = "zip"
+  output_path = "../output/${each.value.zip}"
+  source_dir  = "../functions"
+}
 
 resource "google_storage_bucket_object" "function_zip" {
   for_each = var.functions
   name     = each.key
-  bucket   = google_storage_bucket.bucket.name
-  source   = each.value.zip
+  bucket   = var.create_bucket ? google_storage_bucket.bucket[0].name : data.google_storage_bucket.existing_bucket[0].name
+  # bucket   = google_storage_bucket.bucket.name
+  source = each.value.zip
 }
 
 
@@ -45,10 +52,6 @@ resource "google_cloudfunctions2_function" "function" {
     all_traffic_on_latest_revision = false
     service_account_email          = "terraform-gcf@terraform-cloud-functions-ems.iam.gserviceaccount.com"
   }
-  lifecycle {
-    ignore_changes = [build_config[0].source[0].storage_source[0].object]
-  }
-
 }
 
 resource "google_cloud_run_service_iam_member" "member" {
