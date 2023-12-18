@@ -21,7 +21,7 @@ resource "google_storage_bucket" "bucket" {
 data "archive_file" "function_src" {
   for_each    = var.functions
   type        = "zip"
-  output_path = "../output/${each.value.zip}"
+  output_path = "output/${each.value.zip}"
   source_dir  = "functions"
 }
 
@@ -31,7 +31,7 @@ resource "google_storage_bucket_object" "function_zip" {
   bucket   = local.bucket_name
   # bucket   = google_storage_bucket.bucket[0].name
   # bucket   = google_storage_bucket.bucket.name
-  source = "${data.archive_file.function_src}.zip"
+  source = "${data.archive_file.function_src[each.key]}.zip"
   # source = each.value.zip
 }
 
