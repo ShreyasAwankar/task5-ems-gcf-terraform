@@ -29,9 +29,7 @@ resource "google_storage_bucket_object" "function_zip" {
   for_each = var.functions
   name     = each.key
   bucket   = local.bucket_name
-  # bucket   = google_storage_bucket.bucket[0].name
-  # bucket   = google_storage_bucket.bucket.name
-  source = "${data.archive_file.function_src[each.key]}.zip"
+  source   = "${var.each.key}.zip"
   # source = each.value.zip
 }
 
