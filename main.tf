@@ -31,7 +31,8 @@ resource "google_storage_bucket_object" "function_zip" {
   bucket   = local.bucket_name
   # bucket   = google_storage_bucket.bucket[0].name
   # bucket   = google_storage_bucket.bucket.name
-  source = data.archive_file.function_src.output_path
+  source = data.archive_file.function_src[each.key]
+
   # source = each.value.zip
 }
 
