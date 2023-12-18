@@ -17,7 +17,7 @@ data "archive_file" "function_src" {
   for_each    = var.functions
   type        = "zip"
   output_path = "../output/${each.value.zip}"
-  source_dir  = "../functions"
+  source_dir  = "functions"
 }
 
 resource "google_storage_bucket_object" "function_zip" {
