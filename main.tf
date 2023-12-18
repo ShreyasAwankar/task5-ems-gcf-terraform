@@ -74,9 +74,12 @@ data "google_storage_bucket" "existing_bucket" {
 
 # Create storage bucket if needed
 resource "google_storage_bucket" "bucket" {
-  count    = data.google_storage_bucket.existing_bucket.count == 0 ? 1 : 0
+  count = data.google_storage_bucket.existing_bucket.count
+
+  # Accessing specific instance based on index
+  name = data.google_storage_bucket.existing_bucket[count.index].name
+
   project  = var.project_id
-  name     = "${var.project_id}-task5-bucket"
   location = var.region
 }
 
@@ -92,7 +95,7 @@ data "archive_file" "function_src" {
 resource "google_storage_bucket_object" "function_zip" {
   for_each = var.functions
   name     = each.key
-  bucket   = google_storage_bucket[data.google_storage_bucket.existing_bucket.count == 0 ? "bucket" : "existing_bucket"].name
+  bucket   = google_storage_bucket.bucket[count.index].name
   source   = data.archive_file.function_src[each.key].output_path
 }
 
@@ -108,7 +111,7 @@ resource "google_cloudfunctions2_function" "function" {
 
     source {
       storage_source {
-        bucket = google_storage_bucket[data.google_storage_bucket.existing_bucket.count == 0 ? "bucket" : "existing_bucket"].name
+        bucket = google_storage_bucket.bucket[count.index].name
         object = google_storage_bucket_object.function_zip[each.key].name
       }
     }
