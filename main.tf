@@ -9,7 +9,7 @@ resource "google_storage_bucket" "bucket" {
   count   = var.create_bucket ? 1 : 0
   project = var.project_id
   # name     = "${var.project_id}-task5-bucket"
-  name     = var.create_bucket ? "${var.project_id}-task5-bucket" : data.google_storage_bucket.existing_bucket[0].name
+  name     = var.create_bucket ? "${var.project_id}-task5-bucket" : null
   location = var.region
 }
 
